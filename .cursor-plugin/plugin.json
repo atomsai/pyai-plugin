@@ -1,0 +1,29 @@
+{
+  "name": "pyai",
+  "displayName": "PyAI \u2014 Voice AI",
+  "version": "0.1.0",
+  "description": "Build voice agents, generate text-to-speech, transcribe audio, analyze calls, and create dubbing and narration with PyAI. Connect through browser OAuth.",
+  "author": {
+    "name": "AtomsAI"
+  },
+  "homepage": "https://pyai.com/mcp",
+  "repository": "https://github.com/atomsai/pyai-plugin",
+  "license": "MIT",
+  "keywords": [
+    "pyai",
+    "voice-ai",
+    "voice-agents",
+    "text-to-speech",
+    "tts",
+    "speech-to-text",
+    "stt",
+    "transcription",
+    "dubbing",
+    "voiceover",
+    "call-analysis",
+    "mcp"
+  ],
+  "logo": "assets/logo.svg",
+  "skills": "./skills/",
+  "mcpServers": "./mcp.json"
+}
