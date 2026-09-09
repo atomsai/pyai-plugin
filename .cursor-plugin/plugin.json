@@ -1,7 +1,7 @@
 {
   "name": "pyai",
   "displayName": "PyAI \u2014 Voice AI",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Build voice agents, generate text-to-speech, transcribe audio, analyze calls, and create dubbing and narration with PyAI. Connect through browser OAuth.",
   "author": {
     "name": "AtomsAI"

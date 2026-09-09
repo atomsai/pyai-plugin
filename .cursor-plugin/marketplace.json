@@ -1,0 +1,12 @@
+{
+  "name": "pyai",
+  "owner": { "name": "AtomsAI" },
+  "metadata": { "description": "Official PyAI voice AI tools and workflow skills." },
+  "plugins": [
+    {
+      "name": "pyai",
+      "source": ".",
+      "description": "Voice agents, speech, transcription, dubbing, narration, and call analysis through PyAI MCP."
+    }
+  ]
+}

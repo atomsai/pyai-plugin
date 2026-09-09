@@ -31,6 +31,11 @@ def public_json(url):
 
 def validate(live=False):
     manifest = json.loads((ROOT / '.cursor-plugin/plugin.json').read_text())
+    marketplace = json.loads((ROOT / '.cursor-plugin/marketplace.json').read_text())
+    require(marketplace.get('owner', {}).get('name') == manifest['author']['name'], 'Marketplace publisher mismatch')
+    require(len(marketplace.get('plugins', [])) == 1, 'Expected one marketplace plugin')
+    entry = marketplace['plugins'][0]
+    require(entry['name'] == manifest['name'] and local_file(entry['source']) == ROOT, 'Marketplace must resolve this plugin at the repository root')
     require(re.fullmatch(r'[a-z0-9]+(?:[.-][a-z0-9]+)*', manifest['name']), 'Invalid plugin name')
     require(re.fullmatch(r'\d+\.\d+\.\d+', manifest['version']), 'Invalid release version')
     require(manifest.get('description') and manifest.get('author', {}).get('name'), 'Missing publisher metadata')

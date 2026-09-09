@@ -51,7 +51,7 @@ For actual project operations, `whoami` identifies the authorized workspace and 
 
 ## Local plugin preview in Cursor
 
-Clone this repository. Where local plugin imports are enabled, link the checkout beneath `~/.cursor/plugins/local/pyai`, reload Cursor and inspect Customize. Follow [Cursor's current local plugin instructions](https://cursor.com/docs/plugins). Grok Bot marketplace installation is a separate path; a local Cursor preview does not establish Grok Bot availability.
+Clone this repository, then open Customize → Plugins → Add → From Local Repository and select the checkout. The included marketplace manifest points to the plugin at the repository root. Follow [Cursor's current plugin instructions](https://cursor.com/docs/reference/plugins). Grok Bot marketplace installation is a separate path; a local Cursor preview does not establish Grok Bot availability.
 
 ## Data and permissions
 
