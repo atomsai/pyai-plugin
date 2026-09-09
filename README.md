@@ -43,6 +43,20 @@ Choose Connect/Sign in and complete browser OAuth. Select the intended PyAI proj
 
 After a marketplace installation, the same connection is supplied by `mcp.json`. In Grok Bot, connected apps appear under Settings → Plugins and can be attached with `@`; availability depends on the host's marketplace and account policy. A direct MCP connection loads server tools; installing this plugin also supplies the workflow skills.
 
+## More installation options
+
+Find the hosted MCP server on [Smithery](https://smithery.ai/servers/gaurav-ywfe/pyai). Its listing points to the same PyAI endpoint and browser sign-in flow.
+
+For engineers and terminal-based agents, install the CLI through the [official Homebrew tap](https://github.com/atomsai/homebrew-tap):
+
+```sh
+brew install atomsai/tap/pyai
+pyai login
+pyai speak "Hello from PyAI" -o hello.wav
+```
+
+The speech command consumes project usage. The tap checks for new stable SDK/CLI releases every six hours; run `brew update && brew upgrade pyai` to update an installed copy. See the [CLI guide](https://pyai.com/cli) for npm installation, JSON output and automation.
+
 ## Check the connection
 
 Ask: “Use PyAI get_started and discover_tools with query TTS. Report whether both succeed. Do not generate audio or read project data.”
