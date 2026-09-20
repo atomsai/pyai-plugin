@@ -1,8 +1,7 @@
 {
   "name": "pyai",
-  "displayName": "PyAI \u2014 Voice AI",
-  "version": "0.1.2",
   "description": "Build voice agents, generate text-to-speech, transcribe audio, analyze calls, and create dubbing and narration with PyAI. Connect through browser OAuth.",
+  "version": "0.1.2",
   "author": {
     "name": "AtomsAI"
   },
@@ -22,8 +21,5 @@
     "voiceover",
     "call-analysis",
     "mcp"
-  ],
-  "logo": "assets/logo.svg",
-  "skills": "./skills/",
-  "mcpServers": "./mcp.json"
+  ]
 }
