@@ -1,0 +1,14 @@
+{
+  "name": "pyai",
+  "owner": {
+    "name": "AtomsAI"
+  },
+  "plugins": [
+    {
+      "name": "pyai",
+      "source": ".",
+      "description": "Build voice agents, generate text-to-speech, transcribe audio, analyze calls, and create dubbing and narration with PyAI. Connect through browser OAuth.",
+      "category": "productivity"
+    }
+  ]
+}

@@ -25,7 +25,7 @@ Language, voice and rendering availability come from live capabilities. MCP crea
 
 ## Connect
 
-This repository is a Cursor plugin package. Public marketplace submission/review is separate from publishing this repository; no marketplace approval is claimed.
+This repository contains native Cursor and Factory plugin metadata with eight shared workflow skills. Public marketplace submission/review is separate from publishing this repository; no marketplace approval is claimed.
 
 For a direct MCP connection today, add this remote server in your client's MCP settings:
 
@@ -33,6 +33,7 @@ For a direct MCP connection today, add this remote server in your client's MCP s
 {
   "mcpServers": {
     "pyai": {
+      "type": "http",
       "url": "https://api.pyai.com/mcp"
     }
   }
@@ -66,6 +67,24 @@ For actual project operations, `whoami` identifies the authorized workspace and 
 ## Local plugin preview in Cursor
 
 Clone this repository, then open Customize → Plugins → Add → From Local Repository and select the checkout. The included marketplace manifest points to the plugin at the repository root. Follow [Cursor's current plugin instructions](https://cursor.com/docs/reference/plugins). Grok Bot marketplace installation is a separate path; a local Cursor preview does not establish Grok Bot availability.
+
+## Install in Factory Droid
+
+With [Droid installed](https://docs.factory.ai/droid-cli/quickstart), register this public repository and install the plugin:
+
+```sh
+droid plugin marketplace add atomsai/pyai-plugin
+droid plugin marketplace list
+droid plugin install pyai@pyai-plugin --scope user
+```
+
+Droid derives the registered marketplace name from the repository name. If you pin a tag or commit, read the name from `marketplace list` and use it after `pyai@`. Restart Droid, open `/mcp`, and complete PyAI OAuth for the intended project. Begin with the non-generating connection check above. Use `/plugins` to inspect the installed package and its skills.
+
+For MCP tools alone, use `droid mcp add pyai https://api.pyai.com/mcp --type http` instead. Avoid configuring the endpoint twice. Factory's managed connector catalog has a separate review process; installing from this repository does not establish catalog approval. See [Factory's plugin documentation](https://docs.factory.ai/harness/plugins).
+
+## Emergent custom MCP
+
+In Emergent, open **Advanced controls → Select MCP Tools → New MCP Server**. Name it PyAI and paste the hosted HTTP JSON from Connect, then choose **Verify and Save**. On September 20, 2026, Emergent accepted this configuration, but enabling it required a paid plan. Authentication and tool execution in Emergent remain unverified; a saved configuration alone does not prove that OAuth works. See [Emergent's MCP instructions](https://help.emergent.sh/mcp-model-context-protocol).
 
 ## Data and permissions
 
