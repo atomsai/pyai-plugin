@@ -72,6 +72,20 @@ def validate(live=False):
         tool_line = re.search(r'^Tools: (.+)$', text, re.MULTILINE)
         require(tool_line is not None, f'{skill}: missing referenced tools')
         referenced_tools.update(re.findall(r'`([a-z0-9_]+)`', tool_line.group(1)))
+    openclaw_skills = sorted((ROOT / 'openclaw').glob('*/SKILL.md'))
+    for skill in openclaw_skills:
+        match = re.match(r'^---\nname: ([a-z0-9-]+)\ndescription: ("[^\n]+")\nmetadata: (\{[^\n]+\})\n---\n', skill.read_text())
+        require(match is not None, f'{skill}: invalid OpenClaw frontmatter')
+        name, description, metadata = match.group(1), json.loads(match.group(2)), json.loads(match.group(3))
+        require(name == skill.parent.name and len(name) <= 64, f'{skill}: invalid skill name')
+        require(isinstance(description, str) and 0 < len(description) <= 1024, f'{skill}: invalid description')
+        package = metadata.get('openclaw', {})
+        require(package.get('homepage') == manifest['homepage'], f'{skill}: unexpected homepage')
+        require(package.get('requires') == {'bins': ['pyai']}, f'{skill}: expected the official CLI dependency')
+        installers = package.get('install', [])
+        require(len(installers) == 1 and installers[0].get('kind') == 'brew'
+                and installers[0].get('formula') == 'atomsai/tap/pyai'
+                and installers[0].get('bins') == ['pyai'], f'{skill}: unexpected CLI installer')
     for path in ROOT.rglob('*'):
         if '.git' in path.parts or '__pycache__' in path.parts:
             continue
@@ -100,7 +114,7 @@ def validate(live=False):
             require(error.code == 401 and 'oauth-protected-resource' in error.headers.get('WWW-Authenticate', ''), 'Missing OAuth challenge')
             error.close()
         print(f'Public checks passed: {len(referenced_tools)} referenced tool IDs, OAuth discovery and MCP challenge. No authenticated or paid calls.')
-    print(f'Package checks passed: {len(skills)} skills, hosted MCP config, metadata and logo. This does not prove marketplace installation.')
+    print(f'Package checks passed: {len(skills)} MCP skills, {len(openclaw_skills)} OpenClaw skills, hosted MCP config, metadata and logo. This does not prove marketplace installation.')
 
 
 if __name__ == '__main__':
