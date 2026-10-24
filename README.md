@@ -26,7 +26,7 @@ Language, voice and rendering availability come from live capabilities. MCP can 
 
 ## Connect
 
-This repository contains native Cursor and Factory plugin metadata with eight shared workflow skills. Public marketplace submission/review is separate from publishing this repository; no marketplace approval is claimed.
+This repository contains native Cursor and Factory plugin metadata with nine shared workflow skills. Public marketplace submission/review is separate from publishing this repository; no marketplace approval is claimed.
 
 For a direct MCP connection today, add this remote server in your client's MCP settings:
 
@@ -49,7 +49,24 @@ After a marketplace installation, the same connection is supplied by `mcp.json`.
 
 For Cline, follow [llms-install.md](llms-install.md) for the hosted Streamable HTTP configuration, browser sign-in and a discovery-only check. The Cline marketplace submission is separate from direct installation.
 
-For OpenClaw, the [PyAI calling skill](openclaw/pyai-calling/SKILL.md) uses the official PyAI CLI with request previews and explicit call authorization. It is a skill package, not an automatic MCP installation. ClawHub publication and review are separate from this repository.
+### PyAI Voice & Speech for OpenClaw
+
+Give your assistant a voice, ears and the ability to make approved phone calls. These focused skills use the official PyAI CLI; each can be installed independently and does not automatically install an MCP connection.
+
+| Skill | Ask your assistant | Requirements |
+| --- | --- | --- |
+| [Hear](openclaw/pyai-hear/SKILL.md) | “Transcribe this voice note.” | Supplied audio; `hear:transcribe`, or `transcribe:jobs` for URL jobs |
+| [Speak](openclaw/pyai-speak/SKILL.md) | “Make an audio version of this briefing.” | Requested text; `speak:synthesize` |
+| [Recap](openclaw/pyai-recap/SKILL.md) | “Summarize this customer conversation and show its action items.” | Existing recap ID or timed customer/agent utterances; `recap:read` and Recap enabled |
+| [Calling](openclaw/pyai-calling/SKILL.md) | “Prepare a call and show me the details before dialing.” | Explicit call authorization, eligible project, `telephony:manage`, owned number, agent and credits |
+
+Hear, Speak and Recap do not require a phone number or telephony permission. Sign in with `pyai login`; processing uses the selected project's credits and permissions. Use only the input the user selected for the task. Generated audio and summaries can be returned to the user; sending them to someone else needs separate authorization.
+
+Each folder under `openclaw/` is a standalone skill package. ClawHub submission, review and public installation are separate from this repository; do not assume a pending package is available or bypass a scan hold. Once a package is publicly available, install the specific skill with `clawhub install @atomsai/pyai-hear`, `clawhub install @atomsai/pyai-speak`, or `clawhub install @atomsai/pyai-recap`. The existing calling submission is separate and unchanged.
+
+The first Voice & Speech release covers Hear, Speak and Recap. Cast, Dub, Trace and realtime Omni are not included in these three skills. Live microphone conversations require an audio/SDK integration; neither a speech file nor a Recap summary establishes realtime support.
+
+The [validation record](openclaw/validation.json) identifies the tested skill hashes, live synthetic CLI results, recovery fixtures and complete static/semantic scans. It also records the limits: OpenClaw host execution and physical playback have not been verified.
 
 Find the hosted MCP server on [Smithery](https://smithery.ai/servers/gaurav-ywfe/pyai). Its listing points to the same PyAI endpoint and browser sign-in flow.
 

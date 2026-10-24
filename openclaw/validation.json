@@ -1,0 +1,168 @@
+{
+  "checked_at": "2026-10-24T13:50:58.963062+00:00",
+  "cli_version": "0.9.2",
+  "scanner": {
+    "name": "NVIDIA SkillSpector",
+    "version": "2.12.0",
+    "commit": "d7338f58200a9ae2a24810cee08911ab68b107a7",
+    "mode": "static and LLM semantic, no suppressions",
+    "provider": "claude_cli",
+    "claude_cli_version": "2.1.177",
+    "model": "CLI default; exact model and token usage not exposed"
+  },
+  "skills": [
+    {
+      "skill": "pyai-hear",
+      "sha256": "9f70f46fcf2cfb3523d6ac0382770ff21bc47e3277cd57ad59b86dea069f1a1d",
+      "findings": 0,
+      "suppressed": 0,
+      "analysis_complete": true,
+      "model_calls_succeeded": 4
+    },
+    {
+      "skill": "pyai-speak",
+      "sha256": "713de9f9361f9bd8dbb66e468e0438c0fbf5d3d76f946b08cea22144c3579de9",
+      "findings": 0,
+      "suppressed": 0,
+      "analysis_complete": true,
+      "model_calls_succeeded": 4
+    },
+    {
+      "skill": "pyai-recap",
+      "sha256": "2ec20af542467cfc4671d2b8e1f478c9155c0538b349a0726db34cbcea88698d",
+      "findings": 0,
+      "suppressed": 0,
+      "analysis_complete": true,
+      "model_calls_succeeded": 4
+    }
+  ],
+  "live_sandbox_tests": {
+    "speak": {
+      "passed": true,
+      "bytes": 230444,
+      "channels": 1,
+      "sample_rate": 24000,
+      "actual_frames": 115200,
+      "duration_seconds": 4.8,
+      "header_frames": 2147483647,
+      "qualification": "Streamed WAV has a placeholder length; actual duration calculated from available PCM bytes, not the header."
+    },
+    "hear": {
+      "passed": true,
+      "transcript": "Hello from Pi AI. Please send the proposal tomorrow.",
+      "qualification": "PyAI rendered as Pi AI; not an exact branding transcription."
+    },
+    "recap": {
+      "passed": true,
+      "status": "complete",
+      "expected_action": "Email revised proposal with pricing for five seats tomorrow",
+      "fixture": "Two synthetic customer/agent utterances; no real customer data."
+    }
+  },
+  "controlled_cli_boundary_tests": [
+    {
+      "test": "Speak dry-run does not submit or create output",
+      "passed": true,
+      "requests": [],
+      "exit_code": 0
+    },
+    {
+      "test": "Speak refuses overwrite",
+      "passed": true,
+      "requests": [],
+      "exit_code": 2
+    },
+    {
+      "test": "Hear missing file does not submit",
+      "passed": true,
+      "requests": [],
+      "exit_code": 2
+    },
+    {
+      "test": "Hear local diarization rejected before submission",
+      "passed": true,
+      "requests": [],
+      "exit_code": 2
+    },
+    {
+      "test": "Hear URL job submitted once",
+      "passed": true,
+      "requests": [
+        [
+          "POST",
+          "/v1/transcription/jobs"
+        ]
+      ],
+      "exit_code": 0
+    },
+    {
+      "test": "Hear job can resume by ID",
+      "passed": true,
+      "requests": [
+        [
+          "GET",
+          "/v1/transcription/jobs/job_test"
+        ]
+      ],
+      "exit_code": 0
+    },
+    {
+      "test": "Recap preview does not submit",
+      "passed": true,
+      "requests": [],
+      "exit_code": 0
+    },
+    {
+      "test": "Recap submission uses supplied utterances",
+      "passed": true,
+      "requests": [
+        [
+          "POST",
+          "/v1/recap/calls/recap_test"
+        ]
+      ],
+      "exit_code": 0
+    },
+    {
+      "test": "Recap retrieves existing ID without resubmit",
+      "passed": true,
+      "requests": [
+        [
+          "GET",
+          "/v1/recap/calls/recap_test"
+        ]
+      ],
+      "exit_code": 0
+    },
+    {
+      "test": "Permission denial stops without retry",
+      "passed": true,
+      "requests": [
+        [
+          "POST",
+          "/v1/transcription/jobs"
+        ]
+      ],
+      "exit_code": 3
+    },
+    {
+      "test": "Uncertain Recap failure is not retried",
+      "passed": true,
+      "requests": [
+        [
+          "POST",
+          "/v1/recap/calls/recap_test"
+        ]
+      ],
+      "exit_code": 1
+    }
+  ],
+  "packaging": "ClawHub 0.23.3 dry-run would-publish for all three, one SKILL.md each. Skill-creator quick validation passed.",
+  "limits": [
+    "OpenClaw host invocation and physical audio playback were not exercised.",
+    "Asynchronous Hear URL-job resume and error recovery were checked with controlled local HTTP fixtures; live Hear test used a local-file upload.",
+    "No calls, purchases, voice cloning, customer data or outbound messaging used.",
+    "Scanner result is not ClawHub approval."
+  ],
+  "calling_skill_unchanged_sha256": "89d0c040d64a2e02f9e2f21d5d23dce294000e2a6157a6c8e0bf8caca15d851e"
+}
