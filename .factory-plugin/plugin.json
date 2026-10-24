@@ -1,7 +1,7 @@
 {
   "name": "pyai",
-  "description": "Build voice agents, generate text-to-speech, transcribe audio, analyze calls, and create dubbing and narration with PyAI. Connect through browser OAuth.",
-  "version": "0.1.2",
+  "description": "Make user-approved phone calls, generate speech, transcribe audio, and retrieve available call summaries with PyAI. Connect through browser OAuth.",
+  "version": "0.1.3",
   "author": {
     "name": "AtomsAI"
   },

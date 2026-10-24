@@ -2,7 +2,7 @@
 
 # PyAI — Voice AI
 
-Voice agents, text-to-speech, transcription, call analysis, dubbing and expressive narration for AI assistants.
+Give your AI assistant a phone. Make user-approved calls, generate speech, transcribe audio, and retrieve available call summaries. PyAI also supports voice agent profiles, dubbing, call analysis and expressive narration.
 
 Connect your PyAI project with browser OAuth. Ask for the result you need in plain language; the plugin supplies the MCP connection and focused workflow skills.
 
@@ -13,6 +13,7 @@ Connect your PyAI project with browser OAuth. Ask for the result you need in pla
 | Capability | Example request | Skill |
 | --- | --- | --- |
 | Discover tools | “Show me what PyAI can do for this project.” | `pyai-get-started` |
+| Phone calls | “Prepare a call to this number and show me the details before dialing.” | `pyai-calling` |
 | Voice agents | “Create an appointment-booking agent profile.” | `pyai-voice-agents` |
 | Text-to-speech (TTS) | “Read this welcome message in a warm voice.” | `pyai-text-to-speech` |
 | Speech-to-text (STT) | “Transcribe this interview.” | `pyai-transcription` |
@@ -21,7 +22,7 @@ Connect your PyAI project with browser OAuth. Ask for the result you need in pla
 | Dubbing | “Dub this recording into a supported target language.” | `pyai-dubbing` |
 | Narration | “Turn this script into expressive narration with pauses.” | `pyai-narration` |
 
-Language, voice and rendering availability come from live capabilities. MCP creates and manages voice agent profiles; live microphone and phone sessions use the appropriate SDK, realtime or telephony integration.
+Language, voice and rendering availability come from live capabilities. MCP can place explicitly authorized phone calls through managed telephony. Calls require an eligible project, telephony permissions, an owned caller number, an agent and sufficient credits. Creating an agent profile does not start a call. Live microphone sessions use the realtime SDK.
 
 ## Connect
 
@@ -45,6 +46,10 @@ Choose Connect/Sign in and complete browser OAuth. Select the intended PyAI proj
 After a marketplace installation, the same connection is supplied by `mcp.json`. In Grok Bot, connected apps appear under Settings → Plugins and can be attached with `@`; availability depends on the host's marketplace and account policy. A direct MCP connection loads server tools; installing this plugin also supplies the workflow skills.
 
 ## More installation options
+
+For Cline, follow [llms-install.md](llms-install.md) for the hosted Streamable HTTP configuration, browser sign-in and a discovery-only check. The Cline marketplace submission is separate from direct installation.
+
+For OpenClaw, the [PyAI calling skill](openclaw/pyai-calling/SKILL.md) uses the official PyAI CLI with request previews and explicit call authorization. It is a skill package, not an automatic MCP installation. ClawHub publication and review are separate from this repository.
 
 Find the hosted MCP server on [Smithery](https://smithery.ai/servers/gaurav-ywfe/pyai). Its listing points to the same PyAI endpoint and browser sign-in flow.
 

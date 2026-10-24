@@ -6,7 +6,7 @@
     {
       "name": "pyai",
       "source": ".",
-      "description": "Voice agents, speech, transcription, dubbing, narration, and call analysis through PyAI MCP."
+      "description": "User-approved phone calls, voice agents, speech, transcription and call analysis through PyAI MCP."
     }
   ]
 }

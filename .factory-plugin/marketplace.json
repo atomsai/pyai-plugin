@@ -7,7 +7,7 @@
     {
       "name": "pyai",
       "source": ".",
-      "description": "Build voice agents, generate text-to-speech, transcribe audio, analyze calls, and create dubbing and narration with PyAI. Connect through browser OAuth.",
+      "description": "User-approved phone calls, voice agents, speech, transcription and call analysis through PyAI MCP.",
       "category": "productivity"
     }
   ]

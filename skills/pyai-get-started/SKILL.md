@@ -1,6 +1,6 @@
 ---
 name: pyai-get-started
-description: "Connect to PyAI, discover its voice AI tools, or choose between speech, transcription, voice agents, Trace, Recap, dubbing and narration."
+description: "Connect to PyAI, discover its voice AI tools, or choose between user-approved phone calls, speech, transcription, voice agents, Trace, Recap, dubbing and narration."
 ---
 
 # Get Started
