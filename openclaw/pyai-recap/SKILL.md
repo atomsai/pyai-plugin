@@ -1,6 +1,6 @@
 ---
 name: pyai-recap
-description: "Retrieve PyAI Recap summaries or summarize supplied customer conversations into key points and action items using the official CLI. Use for existing recap IDs or speaker-labelled transcripts with timing. Requires a PyAI account, recap:read and Recap enabled; does not record calls or send follow-ups."
+description: "Retrieve summaries with `pyai recap get`, or summarize timed customer/agent transcripts with `pyai request`. Use for PyAI Recap IDs, key points and action items. This skill is guidance for the `pyai` CLI; `pyai-recap` is not an executable or MCP tool. Requires recap:read and Recap enabled; does not record calls or send follow-ups."
 metadata: {"openclaw":{"homepage":"https://pyai.com/mcp","requires":{"bins":["pyai"]},"install":[{"id":"brew","kind":"brew","formula":"atomsai/tap/pyai","bins":["pyai"],"label":"Install official PyAI CLI"}]}}
 ---
 
@@ -36,7 +36,11 @@ pyai request POST "/v1/recap/calls/RECAP_CALL_ID" --data "@INPUT_PATH" --idempot
 pyai recap get "RECAP_CALL_ID" --json
 ```
 
-The preview is local; successful acceptance is not a completed summary. The header does not by itself guarantee server-side deduplication. Do not automatically repeat the POST after a timeout. Read the same call ID and report uncertainty if its state cannot be established. Poll reads at a reasonable interval, such as every 3 seconds, for no more than the user's waiting limit (120 seconds by default). Return the ID and latest status if still pending. Stop on `failed`, permissions, credit or validation errors.
+The preview is local; successful acceptance is not a completed summary. The header does not by itself guarantee server-side deduplication. Do not automatically repeat the POST after a timeout. Read the same call ID and report uncertainty if its state cannot be established.
+
+The GET response's top-level `status` is **`complete`** when processing succeeds, not `completed`. Stop polling immediately on `complete`; the nested `record` object contains the `summary` and `action_items` fields. Stop on `failed`, permissions, credit or validation errors. Preserve the full successful GET response before presenting its contents.
+
+For a still-pending result, poll the same ID every 3 seconds until an explicit deadline, at most 120 seconds by default. Check the response after each read; do not wait for a different success spelling or run an unbounded shell loop. At the deadline, return the ID and last observed status without another POST.
 
 ## Present the result
 
