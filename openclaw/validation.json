@@ -29,11 +29,12 @@
     },
     {
       "skill": "pyai-recap",
-      "sha256": "2ec20af542467cfc4671d2b8e1f478c9155c0538b349a0726db34cbcea88698d",
+      "sha256": "d426729aa3e0c3931d1176d541320fd8ca67f4953fffc812f8538fd5c91157d0",
       "findings": 0,
       "suppressed": 0,
       "analysis_complete": true,
-      "model_calls_succeeded": 4
+      "model_calls_succeeded": 4,
+      "version": "1.0.1"
     }
   ],
   "live_sandbox_tests": {
@@ -159,10 +160,78 @@
   ],
   "packaging": "ClawHub 0.23.3 dry-run would-publish for all three, one SKILL.md each. Skill-creator quick validation passed.",
   "limits": [
-    "OpenClaw host invocation and physical audio playback were not exercised.",
+    "OpenClaw host execution verified as detailed above; physical speaker playback remains untested.",
     "Asynchronous Hear URL-job resume and error recovery were checked with controlled local HTTP fixtures; live Hear test used a local-file upload.",
     "No calls, purchases, voice cloning, customer data or outbound messaging used.",
     "Scanner result is not ClawHub approval."
   ],
-  "calling_skill_unchanged_sha256": "89d0c040d64a2e02f9e2f21d5d23dce294000e2a6157a6c8e0bf8caca15d851e"
+  "calling_skill_unchanged_sha256": "89d0c040d64a2e02f9e2f21d5d23dce294000e2a6157a6c8e0bf8caca15d851e",
+  "previous_recap_1_0_0_scan": {
+    "skill": "pyai-recap",
+    "sha256": "2ec20af542467cfc4671d2b8e1f478c9155c0538b349a0726db34cbcea88698d",
+    "findings": 0,
+    "suppressed": 0,
+    "analysis_complete": true,
+    "model_calls_succeeded": 4
+  },
+  "host_e2e": {
+    "checked_at": "2026-10-24T14:54:29.884833+00:00",
+    "runtime": "OpenClaw 2026.10.7 (157d8c2), Node 26.12.1, Linux x64",
+    "model": "google-vertex/gemini-2.5-flash",
+    "pyai_cli": "0.9.2",
+    "skill_installation": "Public ClawHub 1.0.0 packages, hashes matched; only Recap replaced with the tested patch candidate. Calling was not installed.",
+    "invocation": "openclaw agent --local with explicit $skill references; actual SKILL.md reads verified in session tool traces.",
+    "speak": {
+      "passed": true,
+      "bytes": 199724,
+      "sha256": "191d70116674a5c139001269dad0a7aff30f5ce6010678036e220f2dcbfd3c66",
+      "channels": 1,
+      "rate": 24000,
+      "actual_frames": 99840,
+      "seconds": 4.16
+    },
+    "hear": {
+      "passed": true,
+      "transcript": "Your appointment is confirmed for Tuesday at 10 a.m.",
+      "source_bytes": 211244,
+      "qualification": "ten a.m. normalized to 10 a.m."
+    },
+    "recap": {
+      "passed": true,
+      "status": "complete",
+      "action_items": [
+        {
+          "owner": "agent",
+          "task": "Email revised proposal with pricing for five seats",
+          "due": "tomorrow",
+          "evidence": "I will email the revised proposal tomorrow with pricing for five seats.",
+          "utterance_index": 1
+        }
+      ],
+      "processing_posts": 1,
+      "final_retrieval_posts": 0,
+      "poll_fix_seconds": 43.72,
+      "previous_polling_seconds": 167.42,
+      "poll_fix_test_sha256": "349fbbfde91d0607a01b64395031ff2fc4a5120dc7ff2f77a0d41d54b1961bde",
+      "final_retrieval_test_sha256": "d426729aa3e0c3931d1176d541320fd8ca67f4953fffc812f8538fd5c91157d0",
+      "qualification": "Processing/polling test preceded wording clarification and the discovery-description fix; final exact bytes passed existing-result retrieval with skill read and zero tool errors."
+    },
+    "observed_gaps": [
+      "Implicit Speak request executed CLI directly without reading the skill; explicit invocation verified instruction loading.",
+      "Hear first guessed an unavailable skill-reading tool and a nonexistent pyai-hear executable, then recovered by reading SKILL.md; not a zero-friction run.",
+      "Recap 1.0.0 waited for completed instead of complete, then recovered after the polling timeout. Corrected instructions terminate on complete.",
+      "A Recap retrieval mistook the skill name for an executable. The final description names the actual CLI commands; repeat retrieval passed without tool errors."
+    ],
+    "setup_repairs": [
+      "Included required native optional OpenClaw dependencies after the first installation failed.",
+      "Used a clean PyAI CLI install after the interrupted combined installation left a non-executable link. Clean installation passed unchanged.",
+      "Configured the documented non-secret Vertex ADC sentinel for the existing cloud VM identity."
+    ],
+    "limits": [
+      "Synthetic sandbox inputs only; no real calls, purchases, customer data or outbound messages.",
+      "File generation and transcription verified; physical speaker playback not tested.",
+      "One OpenClaw runtime/model configuration; this does not guarantee identical decisions across models.",
+      "Scanner complete with zero findings does not substitute for marketplace review."
+    ]
+  }
 }
