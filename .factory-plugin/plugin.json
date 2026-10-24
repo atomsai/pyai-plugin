@@ -1,0 +1,25 @@
+{
+  "name": "pyai",
+  "description": "Make user-approved phone calls, generate speech, transcribe audio, and retrieve available call summaries with PyAI. Connect through browser OAuth.",
+  "version": "0.1.3",
+  "author": {
+    "name": "AtomsAI"
+  },
+  "homepage": "https://pyai.com/mcp",
+  "repository": "https://github.com/atomsai/pyai-plugin",
+  "license": "MIT",
+  "keywords": [
+    "pyai",
+    "voice-ai",
+    "voice-agents",
+    "text-to-speech",
+    "tts",
+    "speech-to-text",
+    "stt",
+    "transcription",
+    "dubbing",
+    "voiceover",
+    "call-analysis",
+    "mcp"
+  ]
+}

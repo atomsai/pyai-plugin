@@ -1,6 +1,7 @@
 {
   "mcpServers": {
     "pyai": {
+      "type": "http",
       "url": "https://api.pyai.com/mcp"
     }
   }
