@@ -1,0 +1,16 @@
+{
+  "name": "atomsai",
+  "owner": {
+    "name": "AtomsAI"
+  },
+  "plugins": [
+    {
+      "name": "pyai",
+      "source": "./",
+      "description": "Build an interruptible website voice assistant, transcribe Hindi-English calls with speaker labels, generate speech, dub recordings, or make user-approved calls."
+    }
+  ],
+  "metadata": {
+    "description": "Voice assistants, call transcription and speech tools from PyAI."
+  }
+}

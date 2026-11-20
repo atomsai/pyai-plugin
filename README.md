@@ -2,7 +2,7 @@
 
 # PyAI — Voice AI
 
-Give your AI assistant a phone. Make user-approved calls, generate speech, transcribe audio, and retrieve available call summaries. PyAI also supports voice agent profiles, dubbing, call analysis and expressive narration.
+Add an interruptible voice assistant to a website, transcribe a noisy Hindi-English call with speaker labels, or turn a welcome script into audio. PyAI also supports approved phone calls, call summaries, compliance evidence, dubbing and narration.
 
 Connect your PyAI project with browser OAuth. Ask for the result you need in plain language; the plugin supplies the MCP connection and focused workflow skills.
 
@@ -14,9 +14,9 @@ Connect your PyAI project with browser OAuth. Ask for the result you need in pla
 | --- | --- | --- |
 | Discover tools | “Show me what PyAI can do for this project.” | `pyai-get-started` |
 | Phone calls | “Prepare a call to this number and show me the details before dialing.” | `pyai-calling` |
-| Voice agents | “Create an appointment-booking agent profile.” | `pyai-voice-agents` |
+| Voice agents | “Add a voice assistant to my website that visitors can interrupt.” | `pyai-voice-agents` |
 | Text-to-speech (TTS) | “Read this welcome message in a warm voice.” | `pyai-text-to-speech` |
-| Speech-to-text (STT) | “Transcribe this interview.” | `pyai-transcription` |
+| Speech-to-text (STT) | “Transcribe this Hindi-English call in Latin letters with speaker labels.” | `pyai-transcription` |
 | Call compliance | “Find missing recording disclosures and show the evidence.” | `pyai-call-compliance` |
 | Call summaries | “Summarize this call and extract next steps.” | `pyai-call-summaries` |
 | Dubbing | “Dub this recording into a supported target language.” | `pyai-dubbing` |
@@ -26,7 +26,7 @@ Language, voice and rendering availability come from live capabilities. MCP can 
 
 ## Connect
 
-This repository contains native Cursor and Factory plugin metadata with nine shared workflow skills. Public marketplace submission/review is separate from publishing this repository; no marketplace approval is claimed.
+Claude Code, Cursor and Factory use the same hosted MCP server and nine workflow skills. Claude Code can install directly from the AtomsAI marketplace below. Availability in each client’s default directory depends on that directory’s review.
 
 For a direct MCP connection today, add this remote server in your client's MCP settings:
 
@@ -84,9 +84,20 @@ The speech command consumes project usage. The tap checks for new stable SDK/CLI
 
 ## Check the connection
 
-Ask: “Use PyAI get_started and discover_tools with query TTS. Report whether both succeed. Do not generate audio or read project data.”
+An anonymous client can initialize the hosted server and list tools. Choose the intended organization and project when signing in. Before generating media or changing a resource, ask “Use PyAI `whoami` to show the project ID, environment, scopes and billing or usage limits. Stop here.” Confirm the project and resolve any unclear limits before continuing.
 
-For actual project operations, `whoami` identifies the authorized workspace and scopes. Tool IDs are stable even when display labels change; for example, the Dubbing status tool is `get_dub_job`.
+To check routing, ask “Use `discover_tools` for a website voice assistant that visitors can interrupt. Show the next step and stop before creating anything.”
+
+## Install in Claude Code
+
+Run these commands in a terminal:
+
+```sh
+claude plugin marketplace add atomsai/pyai-plugin
+claude plugin install pyai@atomsai
+```
+
+Start a fresh Claude Code session. Open `/mcp`, choose the plugin’s PyAI server and sign in to the intended project. Run the identity check above. Use `claude plugin details pyai@atomsai` for the nine skills and `claude mcp list` for the hosted server’s connection status. The plugin supplies the hosted connection, so you only need one PyAI entry for this installation.
 
 ## Local plugin preview in Cursor
 
@@ -126,7 +137,7 @@ Trace/Recap configuration reads may require configure scopes that also allow wri
 
 ## Maintain and validate
 
-Run `python3 scripts/validate.py` for package checks, and `python3 scripts/validate.py --live` to also check public OAuth discovery, the unauthenticated MCP challenge and the live tool IDs referenced by skills. Neither command creates credentials or consumes generation usage.
+Run `python3 scripts/validate.py` for package checks, and `python3 scripts/validate.py --live` to check public OAuth metadata, anonymous initialization and tool listing, and the sign-in challenge for project identity. Neither command creates credentials or consumes generation usage.
 
 The plugin version tracks changes to these files. The hosted MCP service updates independently; clients may need to refresh their tool catalog. This package does not vendor a fixed API schema. See [CONTRIBUTING.md](CONTRIBUTING.md) for maintenance and [SUBMISSION.md](SUBMISSION.md) for marketplace form details.
 
