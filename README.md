@@ -43,7 +43,7 @@ For a direct MCP connection today, add this remote server in your client's MCP s
 
 Choose Connect/Sign in and complete browser OAuth. Select the intended PyAI project and review the requested scopes. No API key, client secret, local Node runtime or startup script is required for this hosted connection. A PyAI account and authorized project are required; generation consumes project usage.
 
-After a marketplace installation, the same connection is supplied by `mcp.json`. In Grok Bot, connected apps appear under Settings → Plugins and can be attached with `@`; availability depends on the host's marketplace and account policy. A direct MCP connection loads server tools; installing this plugin also supplies the workflow skills.
+A marketplace installation supplies the same hosted connection. In Grok Bot, connected apps appear under Settings → Plugins and can be attached with `@`; availability depends on the host's marketplace and account policy. A direct MCP connection loads server tools; installing this plugin also supplies the workflow skills.
 
 ## More installation options
 
@@ -97,7 +97,7 @@ claude plugin marketplace add atomsai/pyai-plugin
 claude plugin install pyai@atomsai
 ```
 
-Start a fresh Claude Code session. Open `/mcp`, choose the plugin’s PyAI server and sign in to the intended project. Run the identity check above. Use `claude plugin details pyai@atomsai` for the nine skills and `claude mcp list` for the hosted server’s connection status. The plugin supplies the hosted connection, so you only need one PyAI entry for this installation.
+Start a fresh Claude Code session. Open `/mcp`, choose the plugin’s PyAI server and sign in to the intended project. Run the identity check above. Use `claude plugin details pyai@atomsai` for the nine skills and one MCP server. Use `claude mcp list` to check the connection. The plugin supplies the hosted connection, so you only need one PyAI entry for this installation.
 
 ## Local plugin preview in Cursor
 
