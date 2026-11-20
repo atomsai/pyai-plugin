@@ -74,8 +74,10 @@ def validate(live=False):
     entries = claude_marketplace['plugins']
     require(len(entries) == 1 and entries[0]['name'] == claude['name'] and local_file(entries[0]['source']) == ROOT,
             'Claude marketplace must resolve the root plugin')
-    for key in ('name', 'version', 'author', 'description', 'mcpServers'):
+    for key in ('name', 'version', 'author', 'description'):
         require(claude[key] == manifest[key], f'Claude metadata mismatch: {key}')
+    # Claude inventories its conventional root file; Factory uses the unprefixed filename.
+    require(json.loads((ROOT / '.mcp.json').read_text()) == config, 'Claude and Factory/Cursor must connect to the same hosted server')
     skills_root = local_file(manifest['skills'])
     require(skills_root == ROOT / 'skills', 'Claude Code loads skills from the shared skills folder')
     skills = sorted(skills_root.glob('*/SKILL.md'))

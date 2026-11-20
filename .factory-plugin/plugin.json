@@ -1,7 +1,7 @@
 {
   "name": "pyai",
   "description": "Build an interruptible website voice assistant, transcribe Hindi-English calls with speaker labels, generate speech, dub recordings, or make user-approved calls.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "author": {
     "name": "AtomsAI"
   },
