@@ -29,6 +29,17 @@ def public_json(url):
         return json.load(response)
 
 
+def mcp_result(endpoint, method, params):
+    payload = {'jsonrpc': '2.0', 'id': 1, 'method': method, 'params': params}
+    request = Request(endpoint, data=json.dumps(payload).encode(), headers={
+        'Content-Type': 'application/json', 'Accept': 'application/json, text/event-stream',
+    })
+    with urlopen(request, timeout=20) as response:
+        envelope = json.load(response)
+    require('result' in envelope and 'error' not in envelope, f'{method} failed')
+    return envelope['result']
+
+
 def validate(live=False):
     manifest = json.loads((ROOT / '.cursor-plugin/plugin.json').read_text())
     marketplace = json.loads((ROOT / '.cursor-plugin/marketplace.json').read_text())
@@ -56,7 +67,17 @@ def validate(live=False):
     factory_entries = factory_marketplace.get('plugins', [])
     require(len(factory_entries) == 1 and factory_entries[0]['name'] == factory['name'], 'Expected one Factory plugin')
     require(local_file(factory_entries[0]['source']) == ROOT, 'Factory marketplace must resolve the root plugin')
+    claude = json.loads((ROOT / '.claude-plugin/plugin.json').read_text())
+    claude_marketplace = json.loads((ROOT / '.claude-plugin/marketplace.json').read_text())
+    require(claude_marketplace['name'] == 'atomsai' and claude_marketplace['owner'] == manifest['author'],
+            'Unexpected Claude marketplace or publisher')
+    entries = claude_marketplace['plugins']
+    require(len(entries) == 1 and entries[0]['name'] == claude['name'] and local_file(entries[0]['source']) == ROOT,
+            'Claude marketplace must resolve the root plugin')
+    for key in ('name', 'version', 'author', 'description', 'mcpServers'):
+        require(claude[key] == manifest[key], f'Claude metadata mismatch: {key}')
     skills_root = local_file(manifest['skills'])
+    require(skills_root == ROOT / 'skills', 'Claude Code loads skills from the shared skills folder')
     skills = sorted(skills_root.glob('*/SKILL.md'))
     require(skills, 'No skills found')
     names, referenced_tools = set(), set()
@@ -106,14 +127,24 @@ def validate(live=False):
         oauth = public_json('https://api.pyai.com/.well-known/oauth-authorization-server')
         require(oauth['registration_endpoint'] == 'https://api.pyai.com/auth/mcp/register', 'DCR endpoint mismatch')
         require('S256' in oauth['code_challenge_methods_supported'], 'PKCE S256 unavailable')
-        request = Request(config['mcpServers']['pyai']['url'], data=json.dumps({'jsonrpc':'2.0','id':1,'method':'initialize','params':{'protocolVersion':'2025-11-25','capabilities':{},'clientInfo':{'name':'pyai-plugin-validation','version':'0.1.0'}}}).encode(), headers={'Content-Type':'application/json','Accept':'application/json, text/event-stream'})
+        endpoint = config['mcpServers']['pyai']['url']
+        server = mcp_result(endpoint, 'initialize', {
+            'protocolVersion': '2025-11-25', 'capabilities': {},
+            'clientInfo': {'name': 'pyai-plugin-validation', 'version': manifest['version']},
+        })
+        require('tools' in server['capabilities'], 'Hosted server has no tool capability')
+        tools = mcp_result(endpoint, 'tools/list', {})
+        public_tools = {tool['name'] for tool in tools['tools']}
+        require(referenced_tools <= public_tools, f'Tools missing from hosted server: {sorted(referenced_tools - public_tools)}')
         try:
-            with urlopen(request, timeout=20):
-                raise ValueError('Expected unauthenticated MCP to return 401')
+            mcp_result(endpoint, 'tools/call', {'name': 'whoami', 'arguments': {}})
         except HTTPError as error:
-            require(error.code == 401 and 'oauth-protected-resource' in error.headers.get('WWW-Authenticate', ''), 'Missing OAuth challenge')
-            error.close()
-        print(f'Public checks passed: {len(referenced_tools)} referenced tool IDs, OAuth discovery and MCP challenge. No authenticated or paid calls.')
+            with error:
+                require(error.code == 401 and 'oauth-protected-resource' in error.headers.get('WWW-Authenticate', ''),
+                        'Missing OAuth challenge on project identity')
+        else:
+            raise ValueError('Anonymous project identity must require sign-in')
+        print(f"Hosted {server['serverInfo']['version']}: {len(public_tools)} public tools. Project identity required OAuth.")
     print(f'Package checks passed: {len(skills)} MCP skills, {len(openclaw_skills)} OpenClaw skills, hosted MCP config, metadata and logo. This does not prove marketplace installation.')
 
 

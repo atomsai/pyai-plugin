@@ -9,9 +9,9 @@ Use the connected PyAI tool schemas as the source of truth; clients may prefix t
 
 Tools: `get_started`, `discover_tools`, `whoami`
 
-Call `get_started` for the current integration guide, then `discover_tools` with the user's use case. Before project operations, use `whoami` to confirm the selected workspace and granted scopes; do not read project data merely to demonstrate connectivity.
+Call `get_started` for the current integration guide, then `discover_tools` with the user's use case. Before project operations, use `whoami` to show the project ID, environment, granted scopes and available billing or usage limits. If the project differs from the intended one or the spend is unclear, stop before submitting.
 
-For a connection check, use only `get_started` and `discover_tools` with query `TTS`. Report whether they succeeded without generating audio or creating resources.
+For an anonymous connection check, initialize and list tools. After sign-in, verify identity with `whoami` and use `discover_tools` with the customer’s exact task. Stop there for a discovery-only request.
 
 For application development, consult https://api.pyai.com/openapi.json and https://docs.pyai.com before writing request fields. Use the official SDK for realtime media sessions. Prefer existing user-supplied files and IDs; do not manufacture example customer data in the connected project.
 

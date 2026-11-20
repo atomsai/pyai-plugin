@@ -6,7 +6,7 @@
     {
       "name": "pyai",
       "source": ".",
-      "description": "User-approved phone calls, voice agents, speech, transcription and call analysis through PyAI MCP."
+      "description": "Build an interruptible website voice assistant, transcribe Hindi-English calls with speaker labels, generate speech, dub recordings, or make user-approved calls."
     }
   ]
 }

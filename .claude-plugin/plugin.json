@@ -1,0 +1,30 @@
+{
+  "name": "pyai",
+  "description": "Build an interruptible website voice assistant, transcribe Hindi-English calls with speaker labels, generate speech, dub recordings, or make user-approved calls.",
+  "version": "0.1.4",
+  "author": {
+    "name": "AtomsAI"
+  },
+  "homepage": "https://pyai.com/mcp",
+  "repository": "https://github.com/atomsai/pyai-plugin",
+  "license": "MIT",
+  "keywords": [
+    "pyai",
+    "voice-ai",
+    "voice-agents",
+    "text-to-speech",
+    "tts",
+    "speech-to-text",
+    "stt",
+    "transcription",
+    "dubbing",
+    "voiceover",
+    "call-analysis",
+    "mcp",
+    "website-voice-assistant",
+    "call-transcription",
+    "hinglish",
+    "speaker-labels"
+  ],
+  "mcpServers": "./mcp.json"
+}
