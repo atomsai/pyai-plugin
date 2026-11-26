@@ -72,6 +72,8 @@ The [validation record](openclaw/validation.json) identifies the tested skill ha
 
 Find the hosted MCP server on [Smithery](https://smithery.ai/servers/gaurav-ywfe/pyai). Its listing points to the same PyAI endpoint and browser sign-in flow.
 
+[![PyAI Voice AI MCP connector](https://glama.ai/mcp/connectors/io.github.atomsai/pyai/badges/score.svg)](https://glama.ai/mcp/connectors/io.github.atomsai/pyai)
+
 For engineers and terminal-based agents, install the CLI through the [official Homebrew tap](https://github.com/atomsai/homebrew-tap):
 
 ```sh
