@@ -4,7 +4,9 @@
 
 Add an interruptible voice assistant to a website, transcribe a noisy Hindi-English call with speaker labels, or turn a welcome script into audio. PyAI also supports approved phone calls, call summaries, compliance evidence, dubbing and narration.
 
-Connect your PyAI project with browser OAuth. Ask for the result you need in plain language; the plugin supplies the MCP connection and focused workflow skills.
+For a visitor who clicks a button and talks on the page, start with the [website voice widget embed](skills/pyai-voice-agents/references/widget-embedding.md). You can inspect the HTML and recorded example before signing in.
+
+To manage your own project, connect with browser OAuth. Ask for the result you need in plain language; the plugin supplies the MCP connection and focused workflow skills.
 
 [Setup guide](https://pyai.com/mcp) · [API docs](https://docs.pyai.com) · [PyAI](https://pyai.com)
 
@@ -22,7 +24,7 @@ Connect your PyAI project with browser OAuth. Ask for the result you need in pla
 | Dubbing | “Dub this recording into a supported target language.” | `pyai-dubbing` |
 | Narration | “Turn this script into expressive narration with pauses.” | `pyai-narration` |
 
-Language, voice and rendering availability come from live capabilities. MCP can place explicitly authorized phone calls through managed telephony. Calls require an eligible project, telephony permissions, an owned caller number, an agent and sufficient credits. Creating an agent profile does not start a call. Live microphone sessions use the realtime SDK.
+Language, voice and rendering availability come from live capabilities. MCP can place explicitly authorized phone calls through managed telephony. Calls require an eligible project, telephony permissions, an owned caller number, an agent and sufficient credits. Creating an agent profile does not start a call. For website conversations, use the managed widget or build a custom interface with the realtime SDK.
 
 ## Connect
 
@@ -66,7 +68,7 @@ Each folder under `openclaw/` is a standalone skill package. Hear, Speak and Rec
 
 For a reproducible OpenClaw test, use an isolated workspace and an explicit skill reference, for example `openclaw agent --local --agent main --message '$pyai-hear Transcribe the audio file /absolute/path/clip.wav'`. Confirm the agent actually reads the installed `SKILL.md`: a successful CLI command alone does not prove that the skill was loaded. Skill names such as `pyai-hear` are not shell commands. The commands are `pyai transcribe`, `pyai speak`, and `pyai recap get` / `pyai request`. Keep the normal host tool and permission controls in place.
 
-The first Voice & Speech release covers Hear, Speak and Recap. Cast, Dub, Trace and realtime Omni are not included in these three skills. Live microphone conversations require an audio/SDK integration; neither a speech file nor a Recap summary establishes realtime support.
+The first Voice & Speech release covers Hear, Speak and Recap. Cast, Dub, Trace and realtime Omni are not included in these three skills. For a live conversation on a website, see the managed widget example above.
 
 The [validation record](openclaw/validation.json) identifies the tested skill hashes, live synthetic CLI results, OpenClaw host runs, recovery fixtures and complete static/semantic scans. It distinguishes direct CLI success from actual skill loading and records failures and corrections. Physical speaker playback has not been verified.
 
