@@ -25,4 +25,4 @@ Starting a voice session streams microphone audio to PyAI and uses project allow
 
 ## What the example verifies
 
-A synthetic visitor asked a product question, interrupted the spoken answer and asked to save one fictional enquiry. The backend recorded one enquiry, and the visitor heard the confirmation. The walkthrough includes the HTML, server action and receipt check. [Reproduce the managed widget example](https://github.com/atomsai/pyai-speech-integrations/blob/main/ai-sdk/web/MANAGED-WIDGET.md)
+A synthetic visitor asked a product question, interrupted the spoken answer and asked to save one fictional enquiry. The backend recorded one enquiry, and the visitor heard the confirmation. The walkthrough includes the HTML, server action and receipt check. [Reproduce the managed widget example](https://raw.githubusercontent.com/atomsai/pyai-speech-integrations/main/ai-sdk/web/MANAGED-WIDGET.md)
