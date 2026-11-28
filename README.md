@@ -8,6 +8,8 @@ For a visitor who clicks a button and talks on the page, start with the [website
 
 To manage your own project, connect with browser OAuth. Ask for the result you need in plain language; the plugin supplies the MCP connection and focused workflow skills.
 
+The official MCP Registry lists [com.pyai/mcp](https://registry.modelcontextprotocol.io/v0.1/servers/com.pyai%2Fmcp/versions/latest) for hosted access. The existing [io.github.atomsai/pyai](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.atomsai%2Fpyai/versions/latest) entry also includes the local npm package. [Add PyAI to VS Code](https://vscode.dev/redirect?url=vscode%3Amcp%2Finstall%3F%257B%2522name%2522%253A%2522pyai%2522%252C%2522type%2522%253A%2522http%2522%252C%2522url%2522%253A%2522https%253A%252F%252Fapi.pyai.com%252Fmcp%2522%257D) to review and install the hosted connection directly.
+
 [Setup guide](https://pyai.com/mcp) · [API docs](https://docs.pyai.com) · [PyAI](https://pyai.com)
 
 ## What you can do
